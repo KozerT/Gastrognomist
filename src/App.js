@@ -6,6 +6,9 @@ function App(props) {
   return (
     <div className="App">
       <Business />
+      <Business />
+
+      <Business />
     </div>
   );
 }
