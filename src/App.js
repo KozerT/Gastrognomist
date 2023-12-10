@@ -1,14 +1,11 @@
+import React from "react";
 import "./App.css";
-import Business from "./Business";
-import { React } from "react";
+import BusinessList from "./BusinessList";
 
 function App(props) {
   return (
     <div className="App">
-      <Business />
-      <Business />
-
-      <Business />
+      <BusinessList />
     </div>
   );
 }
