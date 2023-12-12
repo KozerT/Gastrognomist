@@ -1,6 +1,4 @@
-import "./App.css";
 import React from "react";
-import testData from "./BusinessList";
 
 const Business = ({
   imageSrc,

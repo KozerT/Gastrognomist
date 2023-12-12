@@ -30,11 +30,11 @@ const testData = [
 
 const BusinessList = () => {
   return (
-    <div className="flex flex-wrap justify-center gap-6">
+    <section className="flex flex-wrap justify-center gap-24">
       {testData.map((business, index) => (
         <Business key={index} {...business} />
       ))}
-    </div>
+    </section>
   );
 };
 
