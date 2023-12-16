@@ -2,7 +2,7 @@ import React from "react";
 
 const Header = () => {
   return (
-    <div className=" bg-yellow-500 flex items-center flex-wrap justify-center  py-2 text-white font-semibold text-2xl">
+    <div className="flex flex-wrap items-center justify-center py-2 text-2xl font-semibold text-white bg-yellow-500 ">
       ravenous
     </div>
   );
