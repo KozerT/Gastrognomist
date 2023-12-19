@@ -30,6 +30,54 @@ const testData = [
     rating: 4.7,
     reviewCount: 61,
   },
+  {
+    imageSrc:
+      "https://content.codecademy.com/programs/react/ravenous/pizza.jpg",
+    name: " Kebab-pizza",
+    address: "1000 Solna Stadd",
+    city: "Solna",
+    state: "Stockholm",
+    zipCode: "17288",
+    category: "Swedish",
+    rating: 4.7,
+    reviewCount: 61,
+  },
+  {
+    imageSrc:
+      "https://content.codecademy.com/programs/react/ravenous/pizza.jpg",
+    name: " Kebab-pizza",
+    address: "1000 Solna Stadd",
+    city: "Solna",
+    state: "Stockholm",
+    zipCode: "17288",
+    category: "Swedish",
+    rating: 4.7,
+    reviewCount: 61,
+  },
+  {
+    imageSrc:
+      "https://content.codecademy.com/programs/react/ravenous/pizza.jpg",
+    name: " Kebab-pizza",
+    address: "1000 Solna Stadd",
+    city: "Solna",
+    state: "Stockholm",
+    zipCode: "17288",
+    category: "Swedish",
+    rating: 4.7,
+    reviewCount: 61,
+  },
+  {
+    imageSrc:
+      "https://content.codecademy.com/programs/react/ravenous/pizza.jpg",
+    name: " Kebab-pizza",
+    address: "1000 Solna Stadd",
+    city: "Solna",
+    state: "Stockholm",
+    zipCode: "17288",
+    category: "Swedish",
+    rating: 4.7,
+    reviewCount: 61,
+  },
 ];
 
 function App() {

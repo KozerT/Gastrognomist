@@ -1,5 +1,5 @@
-import React from "react";
-import mainImage from "./mainImage.png";
+import React, { useState, useEffect } from "react";
+import mainImage from "../assets/mainImage.png";
 
 const sortByMode = {
   "Best Match": "best_match",
@@ -8,11 +8,27 @@ const sortByMode = {
 };
 
 const SearchBar = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [location, setLocation] = useState("");
+  const [selectedSort, setSelectedSort] = useState("");
+
+  const handleSortClick = (sortOption) => {
+    setSelectedSort((prevSort) => (prevSort === sortOption ? "" : sortOption));
+  };
+
   const renderSortByMode = () => {
     return Object.keys(sortByMode).map((mode) => {
       let modeValue = sortByMode[mode];
       return (
-        <li key={modeValue} className="w-16 text-center ">
+        <li
+          key={modeValue}
+          onClick={() => handleSortClick(modeValue)}
+          className={`w-16 text-center cursor-pointer hover:font-bold ${
+            selectedSort === modeValue
+              ? "text-yellow-500 font-bold"
+              : "text-white"
+          }`}
+        >
           {mode}
         </li>
       );
