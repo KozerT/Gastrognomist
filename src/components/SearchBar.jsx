@@ -16,6 +16,22 @@ const SearchBar = () => {
     setSelectedSort((prevSort) => (prevSort === sortOption ? "" : sortOption));
   };
 
+  const handleSearchTermChange = ({ target }) => {
+    setSearchTerm(target.value);
+  };
+
+  const handleLocationChange = ({ target }) => {
+    setLocation(target.value);
+  };
+
+  const handleClear = (field) => {
+    if (field === "searchTerm") {
+      setSearchTerm("");
+    } else if (field === "location") {
+      setLocation("");
+    }
+  };
+
   const renderSortByMode = () => {
     return Object.keys(sortByMode).map((mode) => {
       let modeValue = sortByMode[mode];
@@ -50,11 +66,15 @@ const SearchBar = () => {
       <div className="flex justify-around w-8/12 gap-16 rounded-md ">
         <input
           type="text"
+          value={searchTerm}
+          onChange={handleSearchTermChange}
           className="block w-full px-4 py-2 bg-white border rounded-md text-slate-950 focus:outline-none "
           placeholder="Search Business"
         />
         <input
           type="text"
+          value={location}
+          onChange={handleLocationChange}
           className="block w-full px-4 py-2 bg-white border rounded-md text-slate-950 focus:outline-none "
           placeholder="Where?"
         />
