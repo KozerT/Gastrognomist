@@ -24,12 +24,19 @@ const SearchBar = () => {
     setLocation(target.value);
   };
 
-  const handleClear = (field) => {
-    if (field === "searchTerm") {
-      setSearchTerm("");
-    } else if (field === "location") {
-      setLocation("");
-    }
+  // const handleClear = (field) => {
+  //   if (field === "searchTerm") {
+  //     setSearchTerm("");
+  //   } else if (field === "location") {
+  //     setLocation("");
+  //   }
+  // };
+
+  const handleSearch = (event) => {
+    event.preventDefault();
+    console.log(
+      `Searching Yelp with ${searchTerm}, ${location}, ${selectedSort}`
+    );
   };
 
   const renderSortByMode = () => {
@@ -79,7 +86,10 @@ const SearchBar = () => {
           placeholder="Where?"
         />
       </div>
-      <button className="px-8 py-2 mt-3 font-semibold text-white bg-yellow-500 rounded">
+      <button
+        onClick={handleSearch}
+        className="px-8 py-2 mt-3 font-semibold text-white bg-yellow-500 rounded"
+      >
         Let's go
       </button>
     </section>
