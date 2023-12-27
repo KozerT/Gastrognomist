@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import mainImage from "../assets/mainImage.png";
+import { searchBusinesses } from "../utils/yelpAPI";
 
 const sortByMode = {
   "Best Match": "best_match",
@@ -7,7 +8,7 @@ const sortByMode = {
   "Most Reviewed": "review_count",
 };
 
-const SearchBar = () => {
+const SearchBar = ({ searchYelp }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [location, setLocation] = useState("");
   const [selectedSort, setSelectedSort] = useState("");
@@ -24,19 +25,19 @@ const SearchBar = () => {
     setLocation(target.value);
   };
 
-  // const handleClear = (field) => {
-  //   if (field === "searchTerm") {
-  //     setSearchTerm("");
-  //   } else if (field === "location") {
-  //     setLocation("");
-  //   }
-  // };
-
-  const handleSearch = (event) => {
+  const handleSearch = async (event) => {
     event.preventDefault();
-    console.log(
-      `Searching Yelp with ${searchTerm}, ${location}, ${selectedSort}`
-    );
+
+    try {
+      const businesses = await searchBusinesses(
+        searchTerm,
+        location,
+        selectedSort
+      );
+      console.log("Businesses:", businesses);
+    } catch (error) {
+      console.error("Error fetching businesses:", error.message);
+    }
   };
 
   const renderSortByMode = () => {

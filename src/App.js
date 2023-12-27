@@ -4,6 +4,7 @@ import BusinessList from "./components/BusinessList";
 import SearchBar from "./components/SearchBar";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import "whatwg-fetch";
 
 const testData = [
   {
@@ -81,10 +82,14 @@ const testData = [
 ];
 
 function App() {
+  const searchYelp = (term, location, sortBy) => {
+    console.log(`Searching Yelp with ${term}, ${location}, ${sortBy}`);
+  };
+
   return (
     <div className="App">
       <Header />
-      <SearchBar />
+      <SearchBar searchYelp={searchYelp} />
       <BusinessList businesses={testData} />
       <Footer />
     </div>
