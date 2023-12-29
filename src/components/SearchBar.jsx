@@ -2,23 +2,30 @@ import React, { useState, useEffect } from "react";
 import mainImage from "../assets/mainImage.png";
 import { searchBusinesses } from "../utils/yelpAPI";
 
-const sortByMode = {
-  "Best Match": "best_match",
-  "Highest Rated": "rating",
-  "Most Reviewed": "review_count",
-};
-
 const SearchBar = ({ searchYelp }) => {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [term, setTerm] = useState("");
   const [location, setLocation] = useState("");
-  const [selectedSort, setSelectedSort] = useState("");
+  const [sortBy, setSortBy] = useState("best_match");
 
-  const handleSortClick = (sortOption) => {
-    setSelectedSort((prevSort) => (prevSort === sortOption ? "" : sortOption));
+  const sortByOptions = {
+    "Best Match": "best_match",
+    "Highest Rated": "rating",
+    "Most Reviewed": "review_count",
   };
 
-  const handleSearchTermChange = ({ target }) => {
-    setSearchTerm(target.value);
+  const getSortByClass = (sortOption) => {
+    if (sortBy === sortOption) {
+      return "active";
+    }
+    return "";
+  };
+
+  const handleSortChange = (sortOption) => {
+    setSortBy((prevSort) => (prevSort === sortOption ? "" : sortOption));
+  };
+
+  const handleTermChange = ({ target }) => {
+    setTerm(target.value);
   };
 
   const handleLocationChange = ({ target }) => {
@@ -27,33 +34,33 @@ const SearchBar = ({ searchYelp }) => {
 
   const handleSearch = async (event) => {
     event.preventDefault();
-
     try {
-      const businesses = await searchBusinesses(
-        searchTerm,
-        location,
-        selectedSort
-      );
-      console.log("Businesses:", businesses);
+      const businesses = await searchBusinesses(term, location, sortBy);
+      console.log(businesses);
     } catch (error) {
-      console.error("Error fetching businesses:", error.message);
+      console.error("Error fetching businesses:", error); // Log the full error details for debugging
+      if (error.message.includes("403")) {
+        console.error(
+          "The request was forbidden. Check your API key or request frequency."
+        );
+      } else {
+        console.error("An unknown error occurred:", error.message);
+      }
     }
   };
 
-  const renderSortByMode = () => {
-    return Object.keys(sortByMode).map((mode) => {
-      let modeValue = sortByMode[mode];
+  const renderSortByOptions = () => {
+    return Object.keys(sortByOptions).map((option) => {
+      let optionValue = sortByOptions[option];
       return (
         <li
-          key={modeValue}
-          onClick={() => handleSortClick(modeValue)}
+          key={optionValue}
+          onClick={() => handleSortChange(optionValue)}
           className={`w-16 text-center cursor-pointer hover:font-bold ${
-            selectedSort === modeValue
-              ? "text-yellow-500 font-bold"
-              : "text-white"
+            sortBy === optionValue ? "text-yellow-500 font-bold" : "text-white"
           }`}
         >
-          {mode}
+          {option}
         </li>
       );
     });
@@ -67,24 +74,24 @@ const SearchBar = ({ searchYelp }) => {
       }}
     >
       <ul className="flex flex-row justify-center w-9/12 px-4 text-white gap-x-32">
-        {renderSortByMode()}
+        {renderSortByOptions()}
       </ul>
       <hr className="w-[80%] border-1 border-white" />
 
       <div className="flex justify-around w-8/12 gap-16 rounded-md ">
         <input
           type="text"
-          value={searchTerm}
-          onChange={handleSearchTermChange}
+          value={term}
+          onChange={handleTermChange}
           className="block w-full px-4 py-2 bg-white border rounded-md text-slate-950 focus:outline-none "
-          placeholder="Search Business"
+          placeholder="Pizza, tapas, mexican"
         />
         <input
           type="text"
           value={location}
           onChange={handleLocationChange}
           className="block w-full px-4 py-2 bg-white border rounded-md text-slate-950 focus:outline-none "
-          placeholder="Where?"
+          placeholder="City"
         />
       </div>
       <button
