@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import "./App.css";
 import BusinessList from "./components/BusinessList";
 import SearchBar from "./components/SearchBar";
-import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { searchBusinesses } from "./utils/yelpAPI";
+import Header from "./components/navigation/Header";
 
 function App() {
   const [businesses, setBusinesses] = useState([]);
