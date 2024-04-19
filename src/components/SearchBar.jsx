@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import mainImage from "../assets/mainImage.png";
+
 import { searchBusinesses } from "../utils/yelpAPI";
 
 const SearchBar = ({ searchYelp }) => {
@@ -13,12 +14,20 @@ const SearchBar = ({ searchYelp }) => {
     "Most Reviewed": "review_count",
   };
 
-  const getSortByClass = (sortOption) => {
-    if (sortBy === sortOption) {
-      return "active";
-    }
-    return "";
-  };
+  useEffect(() => {
+    console.log("Term updated:", term);
+  }, [term]);
+
+  useEffect(() => {
+    console.log("Location updated:", location);
+  }, [location]);
+
+  // const getSortByClass = (sortOption) => {
+  //   if (sortBy === sortOption) {
+  //     return "active";
+  //   }
+  //   return "";
+  // };
 
   const handleSortChange = (sortOption) => {
     setSortBy((prevSort) => (prevSort === sortOption ? "" : sortOption));
@@ -26,26 +35,25 @@ const SearchBar = ({ searchYelp }) => {
 
   const handleTermChange = ({ target }) => {
     setTerm(target.value);
+    console.log("setted term", term);
   };
 
   const handleLocationChange = ({ target }) => {
     setLocation(target.value);
+    console.log("setted location", location);
   };
 
   const handleSearch = async (event) => {
     event.preventDefault();
     try {
+      console.log("Searching Yelp API...");
       const businesses = await searchBusinesses(term, location, sortBy);
-      console.log(businesses);
+      console.log("Received data from Yelp API:", businesses);
+      searchYelp(term, location, sortBy);
     } catch (error) {
-      console.error("Error fetching businesses:", error); // Log the full error details for debugging
-      if (error.message.includes("403")) {
-        console.error(
-          "The request was forbidden. Check your API key or request frequency."
-        );
-      } else {
-        console.error("An unknown error occurred:", error.message);
-      }
+      console.error("Error fetching businesses:", error);
+      console.error("Request URL:", error.config.url);
+      console.error("Request Headers:", error.config.headers);
     }
   };
 
@@ -78,22 +86,22 @@ const SearchBar = ({ searchYelp }) => {
       </ul>
       <hr className="w-[80%] border-1 border-white" />
 
-      <div className="flex justify-around w-8/12 gap-16 rounded-md ">
+      <form className="flex justify-around w-8/12 gap-16 rounded-md ">
         <input
-          type="text"
+          type="search"
           value={term}
           onChange={handleTermChange}
           className="block w-full px-4 py-2 bg-white border rounded-md text-slate-950 focus:outline-none "
           placeholder="Pizza, tapas, mexican"
         />
         <input
-          type="text"
+          type="search"
           value={location}
           onChange={handleLocationChange}
           className="block w-full px-4 py-2 bg-white border rounded-md text-slate-950 focus:outline-none "
           placeholder="City"
         />
-      </div>
+      </form>
       <button
         onClick={handleSearch}
         className="px-8 py-2 mt-3 font-semibold text-white bg-yellow-500 rounded"

@@ -1,46 +1,29 @@
-// import "whatwg-fetch";
-
-const apiKey = process.env.REACT_APP_YELP_API_KEY;
-const API_ENDPOINT =
-  "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search";
+import axios from "axios";
+import queryString from "query-string";
 
 export const searchBusinesses = async (term, location, sortBy) => {
   try {
-    const response = await fetch(
-      `${API_ENDPOINT}?term=${term}&location=${location}&sort_by=${sortBy}`,
-      {
-        headers: {
-          Authorization: `Bearer ${apiKey}`,
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const queryParams = {
+      term: term,
+      location: location,
+      sort_by: sortBy,
+    };
 
-    if (!response.ok) {
-      throw new Error("Request failed with status: " + response.status);
-    }
+    const queryStringified = queryString.stringify(queryParams);
 
-    const data = await response.json();
-    if (data.businesses) {
-      const businesses = data.businesses.map((business) => ({
-        id: business.id,
-        imageSrc: business.image_url,
-        name: business.name,
-        address: business.location.address1,
-        city: business.location.city,
-        state: business.location.state,
-        zipCode: business.location.zip_code,
-        category: business.categories[0].title,
-        rating: business.rating,
-        reviewCount: business.review_count,
-      }));
-      return businesses;
-    } else {
-      throw new Error("Invalid JSON format");
-    }
+    const url = `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?${queryStringified}`;
+
+    const response = await axios.get(url, {
+      headers: {
+        Authorization: `Bearer ${process.env.REACT_APP_YELP_API_KEY}`,
+        Origin: "localhost",
+        withCredentials: true,
+      },
+    });
+    console.log("Yelp API Response:", response.data);
+    return response.data.businesses;
   } catch (error) {
-    throw new Error("Error fetching businesses: " + error.message);
+    console.error("Error fetching businesses:", error);
+    throw error;
   }
 };
-
-export default searchBusinesses;

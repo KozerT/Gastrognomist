@@ -1,3 +1,5 @@
+import { faBurger } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 
 const Footer = () => {
@@ -11,6 +13,7 @@ const Footer = () => {
               className="flex items-center mb-4 space-x-3 sm:mb-0 rtl:space-x-reverse"
             >
               <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+                <FontAwesomeIcon icon={faBurger} className="mx-2" />
                 Gastronomist
               </span>
             </a>
