@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import mainImage from "../assets/mainImage.png";
-
 import { searchBusinesses } from "../utils/yelpAPI";
 
 const SearchBar = ({ searchYelp }) => {
@@ -76,17 +75,18 @@ const SearchBar = ({ searchYelp }) => {
 
   return (
     <section
-      className="flex flex-col flex-wrap items-center justify-center bg-fixed bg-center bg-cover gap-y-7 py-36 mb-36 "
+      className="flex flex-col flex-wrap items-center justify-center h-screen bg-fixed bg-center bg-cover gap-y-7 py-36 "
       style={{
         backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${mainImage})`,
+        opacity: 0.86,
       }}
     >
-      <ul className="flex flex-row justify-center w-9/12 px-4 text-white gap-x-32">
+      <ul className="flex flex-row justify-center w-9/12 max-w-screen-xl px-4 text-white gap-x-32">
         {renderSortByOptions()}
       </ul>
-      <hr className="w-[80%] border-1 border-white" />
+      <hr className="w-[80%] border-1 border-white max-w-screen-xl" />
 
-      <form className="flex justify-around w-8/12 gap-16 rounded-md ">
+      <form className="flex justify-around w-8/12 max-w-screen-xl gap-16 rounded-md ">
         <input
           type="search"
           value={term}

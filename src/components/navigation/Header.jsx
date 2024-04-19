@@ -4,7 +4,7 @@ import React from "react";
 
 const Header = () => {
   return (
-    <div className="flex flex-wrap items-center justify-between px-10 py-2 text-white bg-yellow-500 ">
+    <div className="flex flex-wrap items-center justify-between px-10 py-2 text-white bg-yellow-500">
       <div className="text-2xl font-semibold">
         <FontAwesomeIcon icon={faBurger} className="mx-2" />
         <span> Gastronomist</span>

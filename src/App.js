@@ -23,10 +23,10 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="flex flex-col min-h-screen App">
       <Header />
       <SearchBar searchYelp={searchYelp} />
-      <BusinessList businesses={businesses} />
+      {/* <BusinessList businesses={businesses} /> */}
       <Footer />
     </div>
   );
