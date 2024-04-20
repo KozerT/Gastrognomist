@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import BusinessList from "./components/BusinessList";
-import SearchBar from "./components/SearchBar";
-import Footer from "./components/Footer";
-import { searchBusinesses } from "./utils/yelpAPI";
-import Header from "./components/navigation/Header";
+import Header from "../components/navigation/Header";
+import Footer from "../components/Footer";
+import SearchBar from "../components/SearchBar";
+import { searchBusinesses } from "../utils/yelpAPI";
 
-function App() {
+const Home = () => {
   const [businesses, setBusinesses] = useState([]);
 
   const searchYelp = (term, location, sortBy) => {
@@ -23,13 +22,13 @@ function App() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen App">
+    <>
       <Header />
       <SearchBar searchYelp={searchYelp} />
       {/* <BusinessList businesses={businesses} /> */}
       <Footer />
-    </div>
+    </>
   );
-}
+};
 
-export default App;
+export default Home;

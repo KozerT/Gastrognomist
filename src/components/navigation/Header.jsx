@@ -10,7 +10,7 @@ const Header = () => {
         <span> Gastronomist</span>
       </div>
       <div>
-        <span className="mx-4">Login</span>
+        <span className="mx-4 hover:text-blue-600">Login</span>
         <button className="px-4 py-2 underline duration-300 rounded-lg hover:text-blue-600 ">
           Sign up
         </button>
