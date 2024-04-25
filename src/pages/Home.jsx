@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import Header from "../components/navigation/Header";
-import Footer from "../components/Footer";
 import SearchBar from "../components/SearchBar";
 import { searchBusinesses } from "../utils/yelpAPI";
 
@@ -23,10 +21,7 @@ const Home = () => {
 
   return (
     <>
-      <Header />
       <SearchBar searchYelp={searchYelp} />
-      {/* <BusinessList businesses={businesses} /> */}
-      <Footer />
     </>
   );
 };
