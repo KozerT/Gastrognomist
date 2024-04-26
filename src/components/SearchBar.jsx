@@ -1,70 +1,47 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import mainImage from "../assets/mainImage.png";
-import { searchBusinesses } from "../utils/yelpAPI";
 
 const SearchBar = ({ searchYelp }) => {
   const [term, setTerm] = useState("");
   const [location, setLocation] = useState("");
   const [sortBy, setSortBy] = useState("best_match");
 
-  const sortByOptions = {
-    "Best Match": "best_match",
-    "Highest Rated": "rating",
-    "Most Reviewed": "review_count",
+  const handleTermChange = (event) => {
+    setTerm(event.target.value);
   };
 
-  useEffect(() => {
-    console.log("Term updated:", term);
-  }, [term]);
-
-  useEffect(() => {
-    console.log("Location updated:", location);
-  }, [location]);
-
-  // const getSortByClass = (sortOption) => {
-  //   if (sortBy === sortOption) {
-  //     return "active";
-  //   }
-  //   return "";
-  // };
-
-  const handleSortChange = (sortOption) => {
-    setSortBy((prevSort) => (prevSort === sortOption ? "" : sortOption));
+  const handleLocationChange = (event) => {
+    setLocation(event.target.value);
   };
 
-  const handleTermChange = ({ target }) => {
-    setTerm(target.value);
-    console.log("setted term", term);
+  const handleSortByChange = (sortByOption) => {
+    setSortBy(sortByOption);
   };
 
-  const handleLocationChange = ({ target }) => {
-    setLocation(target.value);
-    console.log("setted location", location);
-  };
-
-  const handleSearch = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    try {
-      console.log("Searching Yelp API...");
-      const businesses = await searchBusinesses(term, location, sortBy);
-      console.log("Received data from Yelp API:", businesses);
+    if (term && location) {
       searchYelp(term, location, sortBy);
-    } catch (error) {
-      console.error("Error fetching businesses:", error);
-      console.error("Request URL:", error.config.url);
-      console.error("Request Headers:", error.config.headers);
     }
   };
 
   const renderSortByOptions = () => {
+    const sortByOptions = {
+      "Best Match": "best_match",
+      "Highest Rated": "rating",
+      "Most Reviewed": "review_count",
+    };
+
     return Object.keys(sortByOptions).map((option) => {
       let optionValue = sortByOptions[option];
       return (
         <li
           key={optionValue}
-          onClick={() => handleSortChange(optionValue)}
-          className={`w-16 text-center cursor-pointer hover:font-bold ${
-            sortBy === optionValue ? "text-yellow-500 font-bold" : "text-white"
+          onClick={() => handleSortByChange(optionValue)}
+          className={`w-16 text-center cursor-pointer ${
+            sortBy === optionValue
+              ? "text-yellow-500 font-bold"
+              : "text-white hover:font-bold"
           }`}
         >
           {option}
@@ -75,35 +52,37 @@ const SearchBar = ({ searchYelp }) => {
 
   return (
     <section
-      className="flex flex-col flex-wrap items-center justify-center h-screen bg-fixed bg-center bg-cover gap-y-7 py-36 "
+      className="flex flex-col items-center justify-center h-screen bg-fixed bg-center bg-cover gap-y-7 py-36"
       style={{
         backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${mainImage})`,
         opacity: 0.86,
       }}
     >
-      <ul className="flex flex-row justify-center w-9/12 max-w-screen-xl px-4 text-white gap-x-32">
+      <ul className="flex justify-center w-9/12 max-w-screen-xl px-4 text-white gap-x-32">
         {renderSortByOptions()}
       </ul>
       <hr className="w-[80%] border-1 border-white max-w-screen-xl" />
-
-      <form className="flex justify-around w-8/12 max-w-screen-xl gap-16 rounded-md ">
+      <form
+        className="flex justify-around w-8/12 max-w-screen-xl gap-16 rounded-md"
+        onSubmit={handleSubmit}
+      >
         <input
           type="search"
+          placeholder="Pizza, tapas, mexican"
           value={term}
           onChange={handleTermChange}
-          className="block w-full px-4 py-2 bg-white border rounded-md text-slate-950 focus:outline-none "
-          placeholder="Pizza, tapas, mexican"
+          className="block w-full px-4 py-2 bg-white border rounded-md text-slate-950 focus:outline-none"
         />
         <input
           type="search"
+          placeholder="City"
           value={location}
           onChange={handleLocationChange}
-          className="block w-full px-4 py-2 bg-white border rounded-md text-slate-950 focus:outline-none "
-          placeholder="City"
+          className="block w-full px-4 py-2 bg-white border rounded-md text-slate-950 focus:outline-none"
         />
       </form>
       <button
-        onClick={handleSearch}
+        onClick={handleSubmit}
         className="px-8 py-2 mt-3 font-semibold text-white bg-yellow-500 rounded"
       >
         Let's go

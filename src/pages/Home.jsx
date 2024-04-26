@@ -1,22 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import SearchBar from "../components/SearchBar";
-import { searchBusinesses } from "../utils/yelpAPI";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-  const [businesses, setBusinesses] = useState([]);
+  const navigate = useNavigate();
 
   const searchYelp = (term, location, sortBy) => {
-    console.log(
-      "Searching Yelp with term:",
-      term,
-      "location:",
-      location,
-      "sortBy:",
-      sortBy
-    );
-    searchBusinesses(term, location, sortBy).then((businesses) => {
-      setBusinesses(businesses);
-    });
+    const urlEncodedTerm = encodeURI(term);
+    const urlEncodedLocation = encodeURI(location);
+    const urlEncodedSortBy = encodeURI(sortBy);
+
+    const searchUrl = `/search-results?find_desc=${urlEncodedTerm}&find_loc=${urlEncodedLocation}&sort_by=${urlEncodedSortBy}`;
+
+    navigate(searchUrl);
   };
 
   return (
