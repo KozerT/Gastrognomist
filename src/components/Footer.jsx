@@ -10,10 +10,13 @@ const Footer = () => {
         <div className="w-full max-w-screen-xl p-4 mx-auto md:py-8">
           <div className="sm:flex sm:items-center sm:justify-between">
             <p className="flex items-center mb-4 space-x-3 sm:mb-0 rtl:space-x-reverse">
-              <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+              <Link
+                className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"
+                to="/"
+              >
                 <FontAwesomeIcon icon={faBurger} className="mx-2" />
                 Gastronomist
-              </span>
+              </Link>
             </p>
             <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
               <li>

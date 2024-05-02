@@ -1,27 +1,35 @@
 import React, { useState } from "react";
 import mainImage from "../assets/mainImage.png";
+import { useSearchContext } from "../contexts/SearchContext";
 
 const SearchBar = ({ searchYelp }) => {
-  const [term, setTerm] = useState("");
-  const [location, setLocation] = useState("");
-  const [sortBy, setSortBy] = useState("best_match");
+  const { searchParams, setSearchParams } = useSearchContext();
 
   const handleTermChange = (event) => {
-    setTerm(event.target.value);
+    setSearchParams((prevParams) => ({
+      ...prevParams,
+      term: event.target.value,
+    }));
   };
 
   const handleLocationChange = (event) => {
-    setLocation(event.target.value);
+    setSearchParams((prevParams) => ({
+      ...prevParams,
+      location: event.target.value,
+    }));
   };
 
-  const handleSortByChange = (sortByOption) => {
-    setSortBy(sortByOption);
+  const handleSortByChange = (event) => {
+    setSearchParams((prevParams) => ({
+      ...prevParams,
+      sortBy: event.target.value,
+    }));
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (term && location) {
-      searchYelp(term, location, sortBy);
+    if (searchParams.term && searchParams.location) {
+      searchYelp(searchParams.term, searchParams.location, searchParams.sortBy);
     }
   };
 
@@ -39,7 +47,7 @@ const SearchBar = ({ searchYelp }) => {
           key={optionValue}
           onClick={() => handleSortByChange(optionValue)}
           className={`w-16 text-center cursor-pointer ${
-            sortBy === optionValue
+            searchParams.sortBy === optionValue
               ? "text-yellow-500 font-bold"
               : "text-white hover:font-bold"
           }`}
@@ -69,14 +77,14 @@ const SearchBar = ({ searchYelp }) => {
         <input
           type="search"
           placeholder="Pizza, tapas, mexican"
-          value={term}
+          value={searchParams.term}
           onChange={handleTermChange}
           className="block w-full px-4 py-2 bg-white border rounded-md text-slate-950 focus:outline-none"
         />
         <input
           type="search"
           placeholder="City"
-          value={location}
+          value={searchParams.location}
           onChange={handleLocationChange}
           className="block w-full px-4 py-2 bg-white border rounded-md text-slate-950 focus:outline-none"
         />

@@ -1,6 +1,8 @@
 import React from "react";
 import SearchBar from "../components/SearchBar";
 import { useNavigate } from "react-router-dom";
+import Header from "../components/navigation/Header";
+import { SearchProvider } from "../contexts/SearchContext";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -16,9 +18,10 @@ const Home = () => {
   };
 
   return (
-    <>
+    <SearchProvider>
+      <Header />
       <SearchBar searchYelp={searchYelp} />
-    </>
+    </SearchProvider>
   );
 };
 

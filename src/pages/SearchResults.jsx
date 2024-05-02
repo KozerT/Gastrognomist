@@ -1,5 +1,6 @@
 import BusinessList from "../components/BusinessList";
 import Header from "../components/navigation/Header";
+import { SearchProvider } from "../contexts/SearchContext";
 
 const SearchResults = () => {
   const businesses = [
@@ -8,11 +9,12 @@ const SearchResults = () => {
   ];
 
   return (
-    <>
+    <SearchProvider>
+      <Header showSearchFields={true} />
       <div className="container py-8 mx-auto">
         <BusinessList businesses={businesses} />
       </div>
-    </>
+    </SearchProvider>
   );
 };
 

@@ -11,19 +11,21 @@ import Contacts from "./pages/Contacts";
 import Header from "./components/navigation/Header";
 import Footer from "./components/Footer";
 import SearchResults from "./pages/SearchResults";
+import { SearchProvider } from "./contexts/SearchContext";
 
 function App() {
   return (
-    <div className="App">
-      <Header />
-      <Routes>
-        <Route path="/" exact element={<Home />} />
-        <Route path="/search-results" element={<SearchResults />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contacts" element={<Contacts />} />
-      </Routes>
-      <Footer />
-    </div>
+    <SearchProvider>
+      <div className="App">
+        <Routes>
+          <Route path="/" exact element={<Home />} />
+          <Route path="/search-results" element={<SearchResults />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contacts" element={<Contacts />} />
+        </Routes>
+        <Footer />
+      </div>
+    </SearchProvider>
   );
 }
 
