@@ -72,3 +72,5 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 ## TODO:
 
 1. to have a search parameters pre-field in the search-results page inside of the Header ( prompts from the SearchBar ) as a value to the inputs;
+
+2. add search result summary in the SearchResults;

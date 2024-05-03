@@ -6,7 +6,7 @@ export const SearchProvider = ({ children }) => {
   const [searchParams, setSearchParams] = useState({
     term: "",
     location: "",
-    sortBy: "best_match",
+    sortBy: "",
   });
 
   return (

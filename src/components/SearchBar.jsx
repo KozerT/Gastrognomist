@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import mainImage from "../assets/mainImage.png";
 import { useSearchContext } from "../contexts/SearchContext";
 
@@ -19,10 +18,10 @@ const SearchBar = ({ searchYelp }) => {
     }));
   };
 
-  const handleSortByChange = (event) => {
+  const handleSortByChange = (optionValue) => {
     setSearchParams((prevParams) => ({
       ...prevParams,
-      sortBy: event.target.value,
+      sortBy: optionValue,
     }));
   };
 
