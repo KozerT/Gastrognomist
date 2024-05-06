@@ -1,35 +1,33 @@
 import React from "react";
 
-const Business = ({business}) => {
-
+const Business = ({ business }) => {
+  const firstCategory = business.categories.length > 0 ? business.categories[0].title : '';
 
   return (
-    <div className="w-3/12 overflow-hidden bg-white rounded-md shadow-md shadow-slate-200 ">
-      <img
-        src={business.image_url}
-        alt=""
-        className="w-full object-cover max-h-[22rem]"
-      />
-      <div className="w-full p-6 ">
-        <h3 className="mb-3 text-xl font-semibold text-black text-start">
-          {business.name}
-        </h3>
-        <div className="inline-flex w-full ">
-          <address className="flex flex-col w-1/2 gap-2 not-italic text-left ">
-            <p>{business.location.address1}</p>
-            <p>{business.location.city}</p>
-            <p>{`${business.location.state} ${business.location.zip_code}`}</p>
+    <div className="w-full p-4 md:w-1/2 lg:w-1/3 xl:w-1/4">
+      <div className="overflow-hidden bg-white rounded-lg shadow-md">
+        <img
+          src={business.image_url}
+          alt={business.name}
+          className="object-cover w-full h-40"
+        />
+
+        <div className="p-4 mb-4 ">
+          <div className="flex items-center justify-between mb-2 text-lg font-semibold">
+      <h3 className="text-gray-800 ">{business.name}</h3>
+      <span className="text-yellow-600 ">{business.rating} ⭐️</span>
+          </div>
+
+          <address className="mb-4 text-gray-600">
+            <p>{business.location.address1},<span className="ml-2">{business.location.city}</span></p>
+
           </address>
-          <div className="flex flex-col w-1/2 gap-2 text-right ">
-          {business.categories.map((category) => (
-              <p key={category.alias} className="font-medium text-yellow-600 uppercase">
-                {category.title}
-              </p>
-            ))}
-            <p className="font-medium text-yellow-600 ">
-              {business.rating}
-            </p>
-            <p>{business.review_count} reviews </p>
+
+          <div className="flex items-center justify-between">
+            <p className="font-semibold text-yellow-600 uppercase">{firstCategory}</p>
+            <div className="flex items-center space-x-2">
+              <p className="text-gray-600">{business.review_count} reviews</p>
+            </div>
           </div>
         </div>
       </div>
