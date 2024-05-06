@@ -1,4 +1,3 @@
-import mainImage from "../assets/mainImage.png";
 import { useSearchContext } from "../contexts/SearchContext";
 
 const SearchBar = ({ searchYelp }) => {
@@ -59,11 +58,7 @@ const SearchBar = ({ searchYelp }) => {
 
   return (
     <section
-      className="flex flex-col items-center justify-center h-screen bg-fixed bg-center bg-cover gap-y-7 py-36"
-      style={{
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${mainImage})`,
-        opacity: 0.86,
-      }}
+      className="flex flex-col items-center bg-fixed bg-center bg-cover py-36 gap-y-7 min-h-fit"
     >
       <ul className="flex justify-center w-9/12 max-w-screen-xl px-4 text-white gap-x-32">
         {renderSortByOptions()}
