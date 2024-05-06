@@ -7,8 +7,8 @@ export const API_BASE_URL =
 const axiosInstance = axios.create({
   baseURL: API_BASE_URL,
   headers: {
+    accept: "application/json",
     Authorization: `Bearer ${process.env.REACT_APP_YELP_API_KEY}`,
-    Origin: "localhost",
     withCredentials: true,
   },
 });
