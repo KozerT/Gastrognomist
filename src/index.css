@@ -8,9 +8,9 @@
   padding: 0;
 }
 
-html,
-body,
-.App,
-#root {
-  height: 100dvh; 
+.App{
+  min-height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 100%;
 }

@@ -21,7 +21,7 @@ const Home = () => {
   return (
     <SearchProvider>
       <div  
-        className="relative min-h-screen"
+        className="h-screen bg-fixed bg-center bg-no-repeat bg-cover "
            style={{
             backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${mainImage})`,
             opacity: 0.86,

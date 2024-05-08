@@ -73,4 +73,10 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 1. to have a search parameters pre-field in the search-results page inside of the Header ( prompts from the SearchBar ) as a value to the inputs;
 
-2. add search result summary in the SearchResults;
+2. add search result summary in the SearchResults;  sort  rating  from highest lowest; add filter  - 
+
+
+3. avarrage price rang, opening hours; 
+
+4. add a user location for the main page in the city Input; 
+

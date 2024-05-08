@@ -7,7 +7,7 @@ const BusinessList = ({ businesses }) => {
   }
 
   return (
-    <section className="flex flex-wrap justify-center gap-24">
+    <section className="flex flex-wrap items-start justify-center flex-grow gap-24">
       {businesses.map((business) => (
         <Business key={business.id} business={business} />
       ))}

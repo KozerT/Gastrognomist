@@ -30,9 +30,11 @@ const SearchResults = () => {
 
   return (
     <SearchProvider>
+      <div className="relative min">
       <Header showSearchFields={true} />
-      <div className="container py-8 mx-auto">
+      <div className="container py-8 mx-auto min">
         <BusinessList businesses={businesses} />
+      </div>
       </div>
     </SearchProvider>
   );

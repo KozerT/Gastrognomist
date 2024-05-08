@@ -58,14 +58,14 @@ const SearchBar = ({ searchYelp }) => {
 
   return (
     <section
-      className="flex flex-col items-center bg-fixed bg-center bg-cover py-36 gap-y-7 min-h-fit"
+      className="flex flex-col items-center justify-center gap-24 gap-y-7  mt-[20%]"
     >
       <ul className="flex justify-center w-9/12 max-w-screen-xl px-4 text-white gap-x-32">
         {renderSortByOptions()}
       </ul>
       <hr className="w-[80%] border-1 border-white max-w-screen-xl" />
       <form
-        className="flex justify-around w-8/12 max-w-screen-xl gap-16 rounded-md"
+        className="flex justify-around w-8/12 max-w-screen-xl gap-16 rounded-md "
         onSubmit={handleSubmit}
       >
         <input
@@ -89,6 +89,7 @@ const SearchBar = ({ searchYelp }) => {
       >
         Let's go
       </button>
+
     </section>
   );
 };

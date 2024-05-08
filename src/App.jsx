@@ -9,7 +9,7 @@ import { SearchProvider } from "./contexts/SearchContext";
 function App() {
   return (
     <SearchProvider>
-      <div className=" App">
+      <div className=" App" >
         <Routes>
           <Route path="/" exact element={<Home />} />
           <Route path="/search-results" element={<SearchResults />} />
