@@ -9,8 +9,17 @@ export const SearchProvider = ({ children }) => {
     sortBy: "",
   });
 
+  const updateSearchParams = (newParams) => {
+    setSearchParams((prevParams) => ({
+      ...prevParams,
+      ...newParams,
+    }));
+  };
+
+
+
   return (
-    <SearchContext.Provider value={{ searchParams, setSearchParams }}>
+    <SearchContext.Provider value={{ searchParams, setSearchParams,updateSearchParams  }}>
       {children}
     </SearchContext.Provider>
   );

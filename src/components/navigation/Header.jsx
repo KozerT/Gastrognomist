@@ -1,28 +1,21 @@
 import { faBurger, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import React, { useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useSearchContext } from "../../contexts/SearchContext";
 
-const Header = ({ showSearchFields }) => {
-  const { searchParams, setSearchParams } = useSearchContext();
-  const location = useLocation();
+const Header = ({ performSearch }) => {
+  const { searchParams } = useSearchContext();
+  const termRef = useRef(searchParams.term || '');
+  const locationRef = useRef(searchParams.location || '');
+  const page = useLocation();
 
-  const showAdditionalFields = location.pathname === "/search-results";
+  const showAdditionalFields = page.pathname === "/search-results";
 
-  const handleTermChange = (event) => {
-    setSearchParams((prevParams) => ({
-      ...prevParams,
-      term: event.target.value,
-    }));
-  };
+  const handleSubmit=()=>{
+    performSearch(termRef.current.value, locationRef.current.value);
 
-  const handleLocationChange = (event) => {
-    setSearchParams((prevParams) => ({
-      ...prevParams,
-      location: event.target.value,
-    }));
-  };
+  }
 
   return (
     <div className="flex flex-wrap items-center justify-between px-10 py-2 text-white bg-yellow-500">
@@ -32,31 +25,28 @@ const Header = ({ showSearchFields }) => {
       </Link>
 
       {showAdditionalFields && (
-        <div className="justify-center ">
+        <form className="justify-center " onSubmit={handleSubmit}>
           <input
             type="search"
-            value={searchParams.term}
-            onChange={handleTermChange}
+            ref={termRef}
             placeholder="Pizza, tapas, mexican"
             className="px-2 py-1 mx-1 bg-white border rounded text-slate-950 focus:outline-none"
           />
           <input
             type="search"
-            placeholder="City"
-            value={searchParams.location}
-            onChange={handleLocationChange}
+            ref={locationRef}
             className="px-2 py-1 mx-1 bg-white border rounded text-slate-950 focus:outline-none"
           />
-          <button className="px-2 mx-1 py-[2.9px] bg-white border rounded">
+          <button className="px-2 mx-1 py-[2.9px] bg-white border rounded" >
             <FontAwesomeIcon
               icon={faMagnifyingGlass}
               className="text-neutral-400 hover:text-slate-950"
             />
           </button>
-        </div>
+        </form>
       )}
       <div className="flex justify-end">
-        {location.pathname !== "/" && (
+        {page.pathname !== "/" && (
           <>
             <Link
               to="/"

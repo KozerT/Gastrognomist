@@ -1,8 +1,6 @@
 import React from "react";
 
 const Business = ({ business }) => {
-
-  console.log(business, 'This is data :')
   const firstCategory = business.categories.length > 0 ? business.categories[0].title : '';
 
   return (
