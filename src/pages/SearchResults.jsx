@@ -16,7 +16,8 @@ const SearchResults = () => {
 
   const [businesses] = useBusinessSearch(
     term || searchParams.term,
-    locationParam || searchParams.location
+    locationParam || searchParams.location,
+    searchParams.sortBy
   );
 
   useEffect(() => {
@@ -24,11 +25,12 @@ const SearchResults = () => {
   }, [searchParams, setSearchParams]);
 
 
-  const performSearch = (term, location) => {
+  const performSearch = (term, location, sortBy) => {
     setSearchParams({ term, location });
     const encodedTerm = encodeURI(term);
     const encodedLocation = encodeURI(location);
-    navigate(`/search-results?find_desc=${encodedTerm}&find_loc=${encodedLocation}`);
+    const encodedSortBy = encodeURI(sortBy);
+    navigate(`/search-results?find_desc=${encodedTerm}&find_loc=${encodedLocation}&sort_by=${encodedSortBy}`);
   };
 
   return (

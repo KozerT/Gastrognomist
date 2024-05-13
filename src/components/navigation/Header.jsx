@@ -38,6 +38,7 @@ const Header = ({ performSearch }) => {
             className="px-2 py-1 mx-1 bg-white border rounded text-slate-950 focus:outline-none"
           />
           <input
+            placeholder="City"
             type="search"
             ref={locationRef}
             className="px-2 py-1 mx-1 bg-white border rounded text-slate-950 focus:outline-none"

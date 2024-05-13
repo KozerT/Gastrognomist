@@ -10,7 +10,7 @@ const axiosInstance = axios.create({
     accept: "application/json",
     Authorization: `Bearer ${process.env.REACT_APP_YELP_API_KEY}`,
     withCredentials: true,
-  },
+  }
 });
 
 export const get = async (path, queryParams) => {
