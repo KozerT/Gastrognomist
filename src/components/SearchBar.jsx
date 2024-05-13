@@ -64,31 +64,31 @@ const SearchBar = ({ searchYelp }) => {
         {renderSortByOptions()}
       </ul>
       <hr className="w-[80%] border-1 border-white max-w-screen-xl" />
-      <form
-        className="flex justify-around w-8/12 max-w-screen-xl gap-16 rounded-md "
-        onSubmit={handleSubmit}
-      >
-        <input
-          type="search"
-          placeholder="Pizza, tapas, mexican"
-          value={searchParams.term}
-          onChange={handleTermChange}
-          className="block w-full px-4 py-2 bg-white border rounded-md text-slate-950 focus:outline-none"
-        />
-        <input
-          type="search"
-          placeholder="City"
-          value={searchParams.location}
-          onChange={handleLocationChange}
-          className="block w-full px-4 py-2 bg-white border rounded-md text-slate-950 focus:outline-none"
-        />
-      </form>
-      <button
-        onClick={handleSubmit}
-        className="px-8 py-2 mt-3 font-semibold text-white bg-yellow-500 rounded"
-      >
-        Let's go
-      </button>
+           <form
+           className="flex justify-around w-8/12 max-w-screen-xl gap-16 rounded-md "
+           onSubmit={handleSubmit}
+         >
+           <input
+             type="search"
+             placeholder="Pizza, tapas, mexican"
+             value={searchParams.term}
+             onChange={handleTermChange}
+             className="block w-full px-4 py-2 bg-white border rounded-md text-slate-950 focus:outline-none"
+           />
+           <input
+             type="search"
+             placeholder="City"
+             value={searchParams.location}
+             onChange={handleLocationChange}
+             className="block w-full px-4 py-2 bg-white border rounded-md text-slate-950 focus:outline-none"
+           />
+         </form>
+         <button
+           onClick={handleSubmit}
+           className="px-8 py-2 mt-3 font-semibold text-white bg-yellow-500 rounded"
+         >
+           Let's go
+         </button>
 
     </section>
   );

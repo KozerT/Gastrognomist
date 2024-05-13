@@ -7,24 +7,22 @@ import { useEffect } from "react";
 
 
 const SearchResults = () => {
-  const { searchParams, setSearchParams} = useSearchContext();
+  const { searchParams , setSearchParams} = useSearchContext();
   const location = useLocation();
   const navigate = useNavigate();
   const params = new URLSearchParams(location.search);
   const term = params.get("find_desc");
   const locationParam = params.get("find_loc");
 
-  const [businesses, amountResults] =
-    useBusinessSearch(     term || searchParams.term,
-      locationParam || searchParams.location
+  const [businesses] = useBusinessSearch(
+    term || searchParams.term,
+    locationParam || searchParams.location
   );
 
   useEffect(() => {
     setSearchParams(searchParams);
   }, [searchParams, setSearchParams]);
 
-  console.log(term, 'This is term');
-  console.log(location, 'This is location')
 
   const performSearch = (term, location) => {
     setSearchParams({ term, location });

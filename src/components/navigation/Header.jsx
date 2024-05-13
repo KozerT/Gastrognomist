@@ -1,19 +1,24 @@
 import { faBurger, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useSearchContext } from "../../contexts/SearchContext";
 
 const Header = ({ performSearch }) => {
-  const { searchParams } = useSearchContext();
-  const termRef = useRef(searchParams.term || '');
-  const locationRef = useRef(searchParams.location || '');
+  const { setSearchParams } = useSearchContext();
+  const termRef = useRef('');
+  const locationRef = useRef('');
   const page = useLocation();
 
   const showAdditionalFields = page.pathname === "/search-results";
 
-  const handleSubmit=()=>{
-    performSearch(termRef.current.value, locationRef.current.value);
+  const handleSubmit=(event)=>{
+    event.preventDefault();
+    const term = termRef.current?.value;
+    const location = locationRef.current?.value;
+    setSearchParams({ term, location });
+    performSearch(term, location); 
+    
 
   }
 
@@ -24,7 +29,7 @@ const Header = ({ performSearch }) => {
         <span>Gastronomist</span>
       </Link>
 
-      {showAdditionalFields && (
+      {showAdditionalFields &&   (
         <form className="justify-center " onSubmit={handleSubmit}>
           <input
             type="search"

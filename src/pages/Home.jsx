@@ -2,11 +2,13 @@ import React from "react";
 import SearchBar from "../components/SearchBar";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/navigation/Header";
-import { SearchProvider } from "../contexts/SearchContext";
+import { SearchProvider, useSearchContext } from "../contexts/SearchContext";
 import mainImage from "../assets/mainImage.png";
 
 const Home = () => {
   const navigate = useNavigate();
+  const { setSearchParams } = useSearchContext();
+
 
   const searchYelp = (term, location, sortBy) => {
     const urlEncodedTerm = encodeURI(term);
@@ -16,6 +18,7 @@ const Home = () => {
     const searchUrl = `/search-results?find_desc=${urlEncodedTerm}&find_loc=${urlEncodedLocation}&sort_by=${urlEncodedSortBy}`;
 
     navigate(searchUrl);
+    setSearchParams({ term, location, sortBy }); 
   };
 
   return (

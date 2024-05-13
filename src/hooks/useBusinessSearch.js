@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import * as api from "../utils/api.js";
+import { useSearchContext } from "../contexts/SearchContext.jsx";
 
-const useBusinessSearch = (term, location, sortBy) => {
+const useBusinessSearch = () => {
   const [businesses, setBusinesses] = useState([]);
   const [amountResults, setAmountResults] = useState(0);
-  const [searchParams, setSearchParams] = useState({ term, location, sortBy });
+  const { searchParams, setSearchParams } = useSearchContext();
 
   useEffect(() => {
     setBusinesses([]);
@@ -21,9 +22,9 @@ const useBusinessSearch = (term, location, sortBy) => {
       }
     };
     fetchData();
-  }, [searchParams]);
+  }, [searchParams, setSearchParams]);
 
-  return [businesses, amountResults, searchParams, setSearchParams];
+  return [businesses, amountResults];
 };
 
 export default useBusinessSearch;

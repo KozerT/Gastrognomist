@@ -9,20 +9,18 @@ export const SearchProvider = ({ children }) => {
     sortBy: "",
   });
 
-  const updateSearchParams = (newParams) => {
-    setSearchParams((prevParams) => ({
-      ...prevParams,
-      ...newParams,
-    }));
-  };
-
-
 
   return (
-    <SearchContext.Provider value={{ searchParams, setSearchParams,updateSearchParams  }}>
+    <SearchContext.Provider value={{ searchParams, setSearchParams }}>
       {children}
     </SearchContext.Provider>
   );
 };
 
-export const useSearchContext = () => useContext(SearchContext);
+export const useSearchContext = () => {
+  const context = useContext(SearchContext);
+  if (!context) {
+    throw new Error("useSearchContext must be used within a SearchProvider");
+  }
+  return context;
+};
