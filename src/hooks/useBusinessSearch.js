@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import * as api from "../utils/api.js";
 import { useSearchContext } from "../contexts/SearchContext.jsx";
 
-const useBusinessSearch = ({sortBy}) => {
+const useBusinessSearch = () => {
   const [businesses, setBusinesses] = useState([]);
   const [amountResults, setAmountResults] = useState(0);
   const { searchParams, setSearchParams } = useSearchContext();
@@ -13,9 +13,9 @@ const useBusinessSearch = ({sortBy}) => {
       try {
         const { businesses, total } = await api.get(
           "/businesses/search",
-          searchParams,
+          searchParams
         );
-        
+
         let sortedBusinesses = businesses;
         if (searchParams.sortBy === "rating") {
           sortedBusinesses = businesses.sort((a, b) => b.rating - a.rating);
@@ -24,15 +24,15 @@ const useBusinessSearch = ({sortBy}) => {
             (a, b) => b.review_count - a.review_count
           );
         }
-
-        setBusinesses(sortedBusinesses);
+        
+        setBusinesses([...sortedBusinesses]);
         setAmountResults(total);
       } catch (error) {
         console.error("Error fetching businesses:", error);
       }
     };
     fetchData();
-  }, [searchParams, setSearchParams,sortBy ]);
+  }, [searchParams, setSearchParams]);
 
   return [businesses, amountResults];
 };

@@ -4,6 +4,7 @@ import { SearchProvider, useSearchContext } from "../contexts/SearchContext";
 import useBusinessSearch from "../hooks/useBusinessSearch";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import ResultsSummary from '../components/ResultsSummary';
 
 
 const SearchResults = () => {
@@ -14,7 +15,7 @@ const SearchResults = () => {
   const term = params.get("find_desc");
   const locationParam = params.get("find_loc");
 
-  const [businesses] = useBusinessSearch(
+  const [businesses, amountResults] = useBusinessSearch(
     term || searchParams.term,
     locationParam || searchParams.location,
     searchParams.sortBy
@@ -38,7 +39,8 @@ const SearchResults = () => {
       <div className="relative min">
       <Header showSearchFields={true} performSearch={performSearch}  />
       <div className="container py-8 mx-auto min">
-        <BusinessList businesses={businesses} />
+         <ResultsSummary term={term} location={locationParam} amountResults={amountResults} />
+        <BusinessList businesses={businesses} term={term} location={locationParam} amountResults={amountResults} />
       </div>
       </div>
     </SearchProvider>

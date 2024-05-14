@@ -1,7 +1,7 @@
 import React from "react";
 import Business from "./Business";
 
-const BusinessList = ({ businesses }) => {
+const BusinessList = ({ businesses, amountResults, term, location }) => {
   if (!businesses || !businesses.length) {
     return <div></div>;
   }
